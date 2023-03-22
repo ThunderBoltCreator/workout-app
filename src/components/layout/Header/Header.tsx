@@ -1,15 +1,21 @@
 import { useAuth } from 'hooks/useAuth'
-import { FiArrowLeft } from 'react-icons/fi'
+import React from 'react'
+import { IoMdArrowBack } from 'react-icons/io'
+
 import { Hamburger } from '../Hamburger/Hamburger'
 
 import s from './header.module.scss'
 
-const Header = () => {
+type HeaderProps = {
+	backLink: string
+}
+
+const Header: React.FC<HeaderProps> = ({ backLink }) => {
 	const { isAuth } = useAuth()
 	return (
 		<div className={s.header}>
 			<button onClick={() => {}}>
-				<FiArrowLeft />
+				<IoMdArrowBack />
 			</button>
 			<Hamburger />
 		</div>

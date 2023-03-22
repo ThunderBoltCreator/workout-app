@@ -9,8 +9,16 @@
 		border: none;
 		outline: none;
 		cursor: pointer;
+
+
 	}
 
+	> button {
+		font-size: 40px;
+		> svg > path {
+			fill: #fff;
+		}
+	}
 	.menu {
 		position: absolute;
 		top: calc(100% + 8px);

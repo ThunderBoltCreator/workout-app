@@ -9,5 +9,10 @@
 		border: none;
 		outline: none;
 		cursor: pointer;
+
+		> svg {
+			fill: #fff;
+			font-size: 30px;
+		}
 	}
 }
