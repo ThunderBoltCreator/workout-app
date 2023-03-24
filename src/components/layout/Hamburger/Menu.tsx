@@ -1,13 +1,10 @@
-import React from 'react'
 import cn from 'clsx'
-import { menu } from './menu.data'
+import React from 'react'
 import { Link } from 'react-router-dom'
+import { MenuProps } from 'types/types'
 
 import s from './hamburger.module.scss'
-
-interface MenuProps {
-	isShow: boolean
-}
+import { menu } from './menu.data'
 
 export const Menu: React.FC<MenuProps> = ({ isShow }) => {
 	const logoutHandler = () => {}
@@ -21,7 +18,7 @@ export const Menu: React.FC<MenuProps> = ({ isShow }) => {
 			<ul>
 				{menu.map((item, i) => (
 					<li key={`_menu_${i}`}>
-						{/* <Link to={item.link}>{item.title}</Link> */}
+						<Link to={item.link}>{item.title}</Link>
 					</li>
 				))}
 				<li>

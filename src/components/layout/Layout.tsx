@@ -1,15 +1,9 @@
 import cn from 'clsx'
-import React, { ReactNode } from 'react'
+import React from 'react'
+import { PropsLayout } from 'types/types'
 
 import { Header } from './Header/Header'
 import s from './layout.module.scss'
-
-type PropsLayout = {
-	children: ReactNode
-	bgImage: string
-	heading?: string
-	backLink?: string
-}
 
 const Layout: React.FC<PropsLayout> = ({
 	children,

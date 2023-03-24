@@ -1,14 +1,17 @@
-export const menu = [
+import { paths } from 'consts/consts'
+import { menuItem } from 'types/types'
+
+export const menu: menuItem[] = [
 	{
 		title: 'Workouts',
-		link: '/workouts'
+		link: paths.WORKOUTS
 	},
 	{
 		title: 'Create new',
-		link: '/new-workout'
+		link: paths.NEW_WORKOUT
 	},
 	{
 		title: 'Profile',
-		link: '/profile'
+		link: paths.PROFILE
 	}
 ]
