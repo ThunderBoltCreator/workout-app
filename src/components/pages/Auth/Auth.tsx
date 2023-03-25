@@ -1,11 +1,11 @@
 import { Layout } from 'components/layout/Layout'
-import React, { ChangeEvent, useState } from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Button } from 'components/ui/Button/Button'
 import { Field } from 'components/ui/Field/Field'
 
-import image from '../../../../public/images/auth-bg.png'
+import image from '/images/auth-bg.png'
 
 export interface FormType {
 	email: string
@@ -13,8 +13,13 @@ export interface FormType {
 }
 
 export const Auth: React.FC = () => {
-	const { register, handleSubmit } = useForm<FormType>()
-	const onSubmitHandler = (data: FormType) => console.log(data)
+	const { register, handleSubmit, reset } = useForm<FormType>({
+		mode: 'onBlur'
+	})
+	const onSubmitHandler = (data: FormType) => {
+		console.log(data)
+		reset()
+	}
 
 	return (
 		<Layout heading='Sign In' bgImage={image}>
@@ -22,18 +27,17 @@ export const Auth: React.FC = () => {
 				<form onSubmit={handleSubmit(onSubmitHandler)}>
 					<Field
 						type='email'
+						name='email'
 						placeholder='Enter email'
-						{...register('email', {
-							required: 'Email is required'
-						})}
+						register={register}
 					/>
 					<Field
 						type='password'
+						name='password'
 						placeholder='Enter password'
-						register('email')
+						register={register}
 					/>
 					<Button clickHandler={() => {}}>Go</Button>
-					<input placeholder='Enter password' />
 				</form>
 			</div>
 		</Layout>

@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router'
 import { Button } from 'components/ui/Button/Button'
 import { Statistic } from 'components/ui/Statistic/Statistic'
 
+import image from '/images/home-bg.jpg'
+
 import { Layout } from '../../layout/Layout'
 
 import s from './home.module.scss'
@@ -19,7 +21,7 @@ export const Home: React.FC = () => {
 		navigate(link)
 	}
 	return (
-		<Layout bgImage='/public/home-bg.jpg'>
+		<Layout bgImage={image}>
 			<Button clickHandler={onClickButton}>
 				{isAuth ? 'New' : 'Sign In'}
 			</Button>

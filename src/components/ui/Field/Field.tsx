@@ -1,16 +1,28 @@
-import React, { forwardRef, PropsWithoutRef } from 'react'
+import React from 'react'
 import { UseFormRegister } from 'react-hook-form'
 
 import { FormType } from 'components/pages/Auth/Auth'
 
 import s from './field.module.scss'
 
-interface Field extends PropsWithoutRef<JSX.IntrinsicElements['input']> {
-	placeholder: string
-	type: string
+interface Field {
+	placeholder?: string
+	type?: string
 	name: 'email' | 'password'
 	register: UseFormRegister<FormType>
 }
-export const Field = forwardRef<HTMLInputElement, >({ placeholder, type, name, register, ...rest }) => {
-	return <input {...register(name)} {...rest} className={s.input} />
+export const Field: React.FC<Field> = ({
+	placeholder = '',
+	type = 'text',
+	name,
+	register,
+	...rest
+}) => {
+	return (
+		<input
+			{...rest}
+			{...register(name, { required: `${name} is required!` })}
+			className={s.input}
+		/>
+	)
 }
