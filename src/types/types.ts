@@ -9,7 +9,7 @@ export interface MenuProps {
 	isShow: boolean
 }
 export type PropsLayout = {
-	children: ReactNode
+	children?: ReactNode
 	bgImage?: string
 	heading?: string
 	backLink?: string
@@ -30,3 +30,8 @@ export interface StatisticType {
 	title: string
 	value: string
 }
+export interface FormType {
+	email: string
+	password: string
+}
+export type AuthType = 'login' | 'register'

@@ -5,24 +5,32 @@ import { FormType } from 'components/pages/Auth/Auth'
 
 import s from './field.module.scss'
 
+type NameAndTypeField = 'email' | 'password'
 interface Field {
+	label: string
 	placeholder?: string
-	type?: string
-	name: 'email' | 'password'
+	type?: NameAndTypeField
+	name: NameAndTypeField
 	register: UseFormRegister<FormType>
 }
 export const Field: React.FC<Field> = ({
 	placeholder = '',
-	type = 'text',
+	type,
 	name,
 	register,
-	...rest
+	label
 }) => {
 	return (
-		<input
-			{...rest}
-			{...register(name, { required: `${name} is required!` })}
-			className={s.input}
-		/>
+		<div className={s.wrapper}>
+			<label className={s.label} htmlFor={name}>
+				{label}
+			</label>
+			<input
+				placeholder={placeholder}
+				type={type}
+				{...register(name, { required: `${name} is required!` })}
+				className={s.input}
+			/>
+		</div>
 	)
 }
