@@ -30,6 +30,7 @@ export interface StatisticType {
 	title: string
 	value: string
 }
+
 export interface FormType {
 	email: string
 	password: string

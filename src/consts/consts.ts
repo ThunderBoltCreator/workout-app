@@ -6,3 +6,4 @@ export const paths = {
 	WORKOUTS: '/workouts',
 	NOT_FOUND: '*'
 }
+export const TOKEN = 'peach'

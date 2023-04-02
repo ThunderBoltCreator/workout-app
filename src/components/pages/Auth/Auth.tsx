@@ -1,10 +1,5 @@
-import { useMutation } from '@tanstack/react-query'
-import { MutationFunction } from '@tanstack/react-query'
 import { Layout } from 'components/layout/Layout'
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import AuthService from 'services/auth.service'
-import { AuthType, FormType } from 'types/types'
+import React from 'react'
 
 import { Button } from 'components/ui/Button/Button'
 import { Field } from 'components/ui/Field/Field'
@@ -13,31 +8,11 @@ import { Loader } from 'components/ui/Loader'
 import image from '/images/auth-bg.png'
 
 import s from './auth.module.scss'
+import { useAuthPage } from './useAuthPage'
 
 export const Auth: React.FC = () => {
-	const [type, setType] = useState<AuthType>('login')
-
-	const { register, handleSubmit, reset } = useForm<FormType>({
-		mode: 'onBlur'
-	})
-
-	const { isLoading, mutate } = useMutation(
-		['auth'],
-		(email: string, password: string) => {
-			AuthService.main(email, password, type)
-		},
-		{
-			onSuccess: data => {
-				alert('success')
-			}
-		}
-	)
-
-	const onSubmitHandler = (data: FormType) => {
-		const eData = { email: data.email, password: data.password }
-		mutate(eData)
-		reset()
-	}
+	const { handleSubmit, isLoading, onSubmitHandler, register, setType } =
+		useAuthPage()
 
 	return (
 		<>

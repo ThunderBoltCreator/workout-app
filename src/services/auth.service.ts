@@ -1,4 +1,5 @@
 import { $axios } from 'api'
+import { TOKEN } from 'consts/consts'
 import Cookies from 'js-cookie'
 
 import { AuthType } from '../types/types'
