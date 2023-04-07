@@ -15,7 +15,7 @@ export interface IAuthContext {
 	setIsAuth: Dispatch<SetStateAction<boolean>>
 }
 
-export const AuthContext = createContext<IAuthContext | null>(null)
+export const AuthContext = createContext<IAuthContext>({} as IAuthContext)
 
 const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
 	const [isAuth, setIsAuth] = useState(!!Cookies.get(TOKEN))
@@ -24,7 +24,7 @@ const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
 	useEffect(() => {
 		const token = Cookies.get(TOKEN)
-		if (token) setIsAuth(false)
+		if (!token) setIsAuth(false)
 	}, [pathname, isAuth])
 
 	return (

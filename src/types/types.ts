@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { Dispatch, ReactNode, SetStateAction } from 'react'
 
 export interface pathObj {
 	path: string
@@ -7,6 +7,7 @@ export interface pathObj {
 }
 export interface MenuProps {
 	isShow: boolean
+	setShow: Dispatch<SetStateAction<boolean>>
 }
 export type PropsLayout = {
 	children?: ReactNode
@@ -22,8 +23,8 @@ export interface menuItem {
 	link: string
 }
 export interface ButtonProps {
-	children: string | React.ReactNode
-	clickHandler: () => void
+	children?: string | React.ReactNode
+	clickHandler?: () => void
 	size?: string
 }
 export interface StatisticType {
@@ -36,3 +37,4 @@ export interface FormType {
 	password: string
 }
 export type AuthType = 'login' | 'register'
+// export type FieldRegister

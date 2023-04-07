@@ -9,18 +9,23 @@ import { AuthType, FormType } from 'types/types'
 export const useAuthPage = () => {
 	const [type, setType] = useState<AuthType>('login')
 
-	const { register, handleSubmit, reset } = useForm<FormType>({
+	const {
+		register,
+		handleSubmit,
+		reset,
+		formState: { errors }
+	} = useForm<FormType>({
 		mode: 'onBlur'
 	})
 
-	const auth = useAuth()
+	const { isAuth, setIsAuth } = useAuth()
 	const nav = useNavigate()
 
 	useEffect(() => {
-		if (auth?.isAuth) {
+		if (isAuth) {
 			nav('/')
 		}
-	}, [])
+	}, [isAuth])
 
 	const { isLoading, mutate } = useMutation(
 		['auth'],
@@ -28,7 +33,7 @@ export const useAuthPage = () => {
 			AuthService.main(email, password, type),
 		{
 			onSuccess: () => {
-				auth?.setIsAuth(true)
+				setIsAuth(true)
 				reset()
 			}
 		}
@@ -38,5 +43,12 @@ export const useAuthPage = () => {
 		mutate(data)
 	}
 
-	return { setType, register, handleSubmit, isLoading, onSubmitHandler }
+	return {
+		setType,
+		register,
+		handleSubmit,
+		isLoading,
+		onSubmitHandler,
+		errors
+	}
 }

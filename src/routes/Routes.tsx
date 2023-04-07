@@ -1,4 +1,4 @@
-import { paths } from 'consts/consts'
+import { PATHS } from 'consts/consts'
 import { useAuth } from 'hooks/useAuth'
 import { Route, Routes } from 'react-router-dom'
 import { pathObj } from 'types/types'
@@ -15,32 +15,32 @@ export const MyRoutes: React.FC = () => {
 
 	const routes: pathObj[] = [
 		{
-			path: paths.HOME,
-			isAuth: false,
+			path: PATHS.HOME,
+			isAuth: true,
 			element: <Home />
 		},
 		{
-			path: paths.AUTH,
+			path: PATHS.AUTH,
 			isAuth: false,
 			element: <Auth />
 		},
 		{
-			path: paths.PROFILE,
+			path: PATHS.PROFILE,
 			isAuth: false,
 			element: <Profile />
 		},
 		{
-			path: paths.NEW_WORKOUT,
+			path: PATHS.NEW_WORKOUT,
 			isAuth: true,
 			element: <NewWorkout />
 		},
 		{
-			path: paths.WORKOUTS,
+			path: PATHS.WORKOUTS,
 			isAuth: true,
 			element: <Workouts />
 		},
 		{
-			path: paths.NOT_FOUND,
+			path: PATHS.NOT_FOUND,
 			isAuth: false,
 			element: <NotFound />
 		}

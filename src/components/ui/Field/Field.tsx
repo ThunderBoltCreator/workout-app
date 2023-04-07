@@ -1,25 +1,19 @@
 import React from 'react'
-import { UseFormRegister } from 'react-hook-form'
-
-import { FormType } from 'components/pages/Auth/Auth'
+import { FieldValues, UseFormRegister } from 'react-hook-form'
+import { FormType } from 'types/types'
 
 import s from './field.module.scss'
 
-type NameAndTypeField = 'email' | 'password'
-interface Field {
+interface IField {
 	label: string
 	placeholder?: string
-	type?: NameAndTypeField
-	name: NameAndTypeField
-	register: UseFormRegister<FormType>
+	type?: string
+	name: string
+	register: UseFormRegister<FieldValues>
+	error?: string
 }
-export const Field: React.FC<Field> = ({
-	placeholder = '',
-	type,
-	name,
-	register,
-	label
-}) => {
+export function Field(props: IField) {
+	const { label, name, register, error, placeholder, type } = props
 	return (
 		<div className={s.wrapper}>
 			<label className={s.label} htmlFor={name}>
@@ -31,6 +25,7 @@ export const Field: React.FC<Field> = ({
 				{...register(name, { required: `${name} is required!` })}
 				className={s.input}
 			/>
+			{error && <div className='error'>{error}</div>}
 		</div>
 	)
 }

@@ -1,4 +1,4 @@
-import { paths } from 'consts/consts'
+import { PATHS } from 'consts/consts'
 import { useAuth } from 'hooks/useAuth'
 import React from 'react'
 import { IoMdArrowBack } from 'react-icons/io'
@@ -13,21 +13,25 @@ import s from './header.module.scss'
 const Header: React.FC<HeaderProps> = ({ backLink = '' }) => {
 	const { pathname } = useLocation()
 	const navigate = useNavigate()
-	console.log(pathname)
+
+	const { isAuth } = useAuth()
+
+	// if (!isAuth) return null
 
 	return (
-		<div className={s.header}>
-			{pathname !== '/' ? (
-				<button onClick={() => navigate(backLink)}>
-					<IoMdArrowBack />
-				</button>
-			) : (
-				<button onClick={() => navigate(paths.PROFILE)}>
-					<SlUser />
-				</button>
-			)}
-			<Hamburger />
-		</div>
+		<header className={s.header}>
+			{pathname !== '/auth' &&
+				(pathname !== '/' || !isAuth ? (
+					<button onClick={() => navigate(isAuth ? backLink : PATHS.AUTH)}>
+						<IoMdArrowBack />
+					</button>
+				) : (
+					<button onClick={() => navigate(PATHS.PROFILE)}>
+						<SlUser />
+					</button>
+				))}
+			{isAuth && <Hamburger />}
+		</header>
 	)
 }
 
