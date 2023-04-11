@@ -32,9 +32,14 @@ export interface StatisticType {
 	value: string
 }
 
-export interface FormType {
+export interface AuthFormType {
 	email: string
 	password: string
 }
+export interface IExerciseForm {
+	name: string
+	times: number
+	iconPath: string
+}
 export type AuthType = 'login' | 'register'
-// export type FieldRegister
+export type IFieldName = 'email' | 'password'

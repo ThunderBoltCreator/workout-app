@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import AuthService from 'services/auth.service'
-import { AuthType, FormType } from 'types/types'
+import { AuthFormType, AuthType } from 'types/types'
 
 export const useAuthPage = () => {
 	const [type, setType] = useState<AuthType>('login')
@@ -14,7 +14,7 @@ export const useAuthPage = () => {
 		handleSubmit,
 		reset,
 		formState: { errors }
-	} = useForm<FormType>({
+	} = useForm<AuthFormType>({
 		mode: 'onBlur'
 	})
 
@@ -29,7 +29,7 @@ export const useAuthPage = () => {
 
 	const { isLoading, mutate } = useMutation(
 		['auth'],
-		({ email, password }: FormType) =>
+		({ email, password }: AuthFormType) =>
 			AuthService.main(email, password, type),
 		{
 			onSuccess: () => {
@@ -39,7 +39,7 @@ export const useAuthPage = () => {
 		}
 	)
 
-	const onSubmitHandler = (data: FormType) => {
+	const onSubmitHandler = (data: AuthFormType) => {
 		mutate(data)
 	}
 

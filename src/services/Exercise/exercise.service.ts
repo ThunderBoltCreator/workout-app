@@ -16,15 +16,17 @@ interface IExerciseService {
 	) => Promise<AxiosResponse<IExercise>>
 	delete: (id: number) => Promise<AxiosResponse<DeleteMessage>>
 }
-interface IExercise {
+export interface IExercise {
 	id: number
 	createdAt: string
 	updatedAt: string
 	name: string
 	times: number
 	iconPath: string
+	exerciseLogId?: number
 }
 type DeleteMessage = 'Exercise deleted!'
+
 export const ExerciseService: IExerciseService = {
 	getAll: async () => {
 		const path = ROUTES.EXERCISES.EXERCISES

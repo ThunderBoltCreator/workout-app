@@ -1,7 +1,7 @@
 import { Layout } from 'components/layout/Layout'
 import Cookies from 'js-cookie'
 import React from 'react'
-import { FormType } from 'types/types'
+import { AuthFormType } from 'types/types'
 
 import { Button } from 'components/ui/Button/Button'
 import { Field } from 'components/ui/Field/Field'

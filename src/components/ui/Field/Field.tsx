@@ -1,19 +1,19 @@
-import React from 'react'
-import { FieldValues, UseFormRegister } from 'react-hook-form'
-import { FormType } from 'types/types'
+import { RegisterOptions, UseFormRegister } from 'react-hook-form'
 
 import s from './field.module.scss'
 
 interface IField {
-	label: string
+	label?: string
 	placeholder?: string
 	type?: string
-	name: string
-	register: UseFormRegister<FieldValues>
+	name: any
+	register: UseFormRegister<any>
 	error?: string
+	options?: RegisterOptions
 }
+
 export function Field(props: IField) {
-	const { label, name, register, error, placeholder, type } = props
+	const { label, name, register, error, placeholder, type, options } = props
 	return (
 		<div className={s.wrapper}>
 			<label className={s.label} htmlFor={name}>
@@ -22,7 +22,7 @@ export function Field(props: IField) {
 			<input
 				placeholder={placeholder}
 				type={type}
-				{...register(name, { required: `${name} is required!` })}
+				{...register(name, options)}
 				className={s.input}
 			/>
 			{error && <div className='error'>{error}</div>}

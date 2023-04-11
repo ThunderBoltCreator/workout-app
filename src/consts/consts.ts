@@ -3,6 +3,7 @@ export const PATHS = {
 	AUTH: '/auth',
 	PROFILE: '/profile',
 	NEW_WORKOUT: '/new-workout',
+	NEW_EXERCISE: '/new-exercise',
 	WORKOUTS: '/workouts',
 	NOT_FOUND: '*'
 }

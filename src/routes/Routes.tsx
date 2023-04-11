@@ -5,10 +5,11 @@ import { pathObj } from 'types/types'
 
 import { Auth } from 'components/pages/Auth/Auth'
 import { Home } from 'components/pages/Home/Home'
+import { NewExercise } from 'components/pages/NewExercises/NewExercise'
 import { NewWorkout } from 'components/pages/NewWorkout/NewWorkout'
 import { NotFound } from 'components/pages/NotFound/NotFound'
 import { Profile } from 'components/pages/Profile/Profile'
-import { Workouts } from 'components/pages/Workouts/Workouts'
+import { Workouts } from 'components/pages/Workout/Workout'
 
 export const MyRoutes: React.FC = () => {
 	const { isAuth } = useAuth()
@@ -33,6 +34,11 @@ export const MyRoutes: React.FC = () => {
 			path: PATHS.NEW_WORKOUT,
 			isAuth: true,
 			element: <NewWorkout />
+		},
+		{
+			path: PATHS.NEW_EXERCISE,
+			isAuth: true,
+			element: <NewExercise />
 		},
 		{
 			path: PATHS.WORKOUTS,
