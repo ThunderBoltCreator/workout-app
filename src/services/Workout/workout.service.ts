@@ -9,18 +9,21 @@ export interface IWorkoutResponse {
 }
 interface IWorkoutService {
 	getAll: () => Promise<AxiosResponse<IWorkout[]>>
-	getById: () => Promise<AxiosResponse<IWorkout>>
+	getById: (id: number) => Promise<AxiosResponse<IWorkout>>
 	create: (body: IWorkoutResponse) => Promise<AxiosResponse<IWorkout>>
-	update: (body: IWorkoutResponse, id: number) => Promise<AxiosResponse<IWorkout>>
+	update: (
+		body: IWorkoutResponse,
+		id: number
+	) => Promise<AxiosResponse<IWorkout>>
 	delete: (id: number) => Promise<AxiosResponse<DeleteMessage>>
 }
-interface IWorkout {
+export interface IWorkout {
 	id: number
 	createdAt: string
 	updatedAt: string
 	name: string
 	exercises?: IExercise[]
-	minutes?: number
+	minute?: number
 }
 type DeleteMessage = 'Workout deleted successfully!'
 
@@ -29,9 +32,9 @@ export const WorkoutService: IWorkoutService = {
 		const path = ROUTES.WORKOUTS.WORKOUTS
 		return await $axios.get<IWorkout[]>(path)
 	},
-	getById: async () => {
+	getById: async id => {
 		const path = ROUTES.WORKOUTS.WORKOUTS
-		return await $axios.get<IWorkout>(path)
+		return await $axios.get<IWorkout>(path + `/${id}`)
 	},
 	create: async body => {
 		const path = ROUTES.WORKOUTS.WORKOUTS

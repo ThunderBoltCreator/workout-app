@@ -1,5 +1,6 @@
 import cn from 'clsx'
 import { Layout } from 'components/layout/Layout'
+import { useServerUrl } from 'hooks/useServerUrl'
 import React from 'react'
 import { Controller } from 'react-hook-form'
 
@@ -70,9 +71,7 @@ export const NewExercise: React.FC = () => {
 								{data.map(name => (
 									<img
 										key={`ex img ${name}`}
-										src={`${
-											import.meta.env.VITE_SERVER_URL
-										}${getIconPath(name)}`}
+										src={useServerUrl(getIconPath(name))}
 										alt={name}
 										className={cn({
 											[s.active]: value === getIconPath(name)

@@ -25,11 +25,8 @@ export interface IUserService {
 const UserService: IUserService = {
 	getProfile: async () => {
 		try {
-			console.log('токен при запросе', Cookies.get(TOKEN))
-
 			const path = ROUTES.USER.PROFILE
-			const result = await $axios.get<IProfile>(path)
-			return result
+			return await $axios.get<IProfile>(path)
 		} catch (error: any) {
 			console.error(error)
 			return {} as Promise<AxiosResponse<IProfile>>

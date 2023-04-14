@@ -1,6 +1,9 @@
 import { $axios } from 'api'
 import { AxiosResponse } from 'axios'
 import { ROUTES } from 'consts/consts'
+import { IWorkoutLog } from 'services/Workout/workout-log.service'
+
+import { IExercise } from './exercise.service'
 
 export interface IExerciseBody {
 	name?: string
@@ -8,21 +11,48 @@ export interface IExerciseBody {
 	iconPath?: string
 }
 interface IExerciseLogService {
-	getById: (exerciseId: number) => Promise<AxiosResponse<IExercise[]>>
-	create: (exerciseId: number) => Promise<AxiosResponse<IExercise>>
-	update: (exerciseId: number) => Promise<AxiosResponse<IExercise>>
-	updateComplete: (exerciseId: number) => Promise<AxiosResponse<any>>
+	getById: (
+		exerciseId: number | string
+	) => Promise<AxiosResponse<IExerciseLog>>
+	create: (exerciseId: number | string) => Promise<AxiosResponse<IExerciseLog>>
+	update: (
+		exerciseId: number | string,
+		body: IExerciseUpdateLogBody
+	) => Promise<AxiosResponse<ITime>>
+	updateComplete: (
+		exerciseId: number | string,
+		isCompleted: boolean
+	) => Promise<AxiosResponse<any>>
+}
+interface IExerciseUpdateLogBody {
+	weight?: number
+	repeat?: number
+	isCompleted?: boolean
+}
+export interface ITime {
+	id: number
+	createdAt: string
+	updatedAt: string
+	weight: number
+	repeat: number
+	isCompleted: boolean
+	exerciseLogId: number
+	prevWeight?: number
+	prevRepeat?: number
 }
 export interface IExerciseLog {
 	id: number
 	createdAt: string
 	updatedAt: string
-	name: string
-	times: number
-	iconPath: string
-	exerciseLogId?: number
+	isCompleted: boolean
+	userId: number
+	workoutLogId: number
+	exerciseId: number
+	exercise?: IExercise
+	times?: ITime[]
+	workoutLog?: IWorkoutLog
 }
-interface ITimes {}
+
 const pathAll = ROUTES.EXERCISES.LOGS.ALL
 const pathCompleted = ROUTES.EXERCISES.LOGS.COMPLETE
 
@@ -31,12 +61,15 @@ export const ExerciseLogService: IExerciseLogService = {
 		return await $axios.get<IExerciseLog>(pathAll + `/${exerciseId}`)
 	},
 	create: async exerciseId => {
-		return await $axios.post<IExercise>(pathAll + `/${exerciseId}`)
+		return await $axios.post<IExerciseLog>(pathAll + `/${exerciseId}`)
 	},
-	update: async exerciseId => {
-		return await $axios.put<IExercise>(pathAll + `/${exerciseId}`)
+	update: async (exerciseId, body) => {
+		return await $axios.put<ITime>(pathAll + `/${exerciseId}`, body)
 	},
-	updateComplete: async exerciseId => {
-		return await $axios.put<any>(pathCompleted + `/${exerciseId}`)
+	updateComplete: async (exerciseId, isCompleted) => {
+		return await $axios.patch<IExerciseLog>(
+			pathCompleted + `/${exerciseId}`,
+			isCompleted
+		)
 	}
 }

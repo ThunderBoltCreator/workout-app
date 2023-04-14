@@ -4,7 +4,7 @@ import React from 'react'
 import s from './alert.module.scss'
 
 interface IAlertProps {
-	type?: 'success' | 'error'
+	type?: 'success' | 'error' | 'warning'
 	text: string
 }
 

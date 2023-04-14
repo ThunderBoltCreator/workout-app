@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { TOKEN } from 'consts/consts'
+import { useServerUrl } from 'hooks/useServerUrl'
 import Cookies from 'js-cookie'
 
-const API_URL = `${import.meta.env.VITE_SERVER_URL}/api`
+const API_URL = useServerUrl('api')
 
 export const $axios = axios.create({
 	baseURL: API_URL,

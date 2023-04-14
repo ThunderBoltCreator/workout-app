@@ -4,12 +4,14 @@ import { Route, Routes } from 'react-router-dom'
 import { pathObj } from 'types/types'
 
 import { Auth } from 'components/pages/Auth/Auth'
+import Exercise from 'components/pages/Exercise/Exercise'
 import { Home } from 'components/pages/Home/Home'
 import { NewExercise } from 'components/pages/NewExercises/NewExercise'
 import { NewWorkout } from 'components/pages/NewWorkout/NewWorkout'
 import { NotFound } from 'components/pages/NotFound/NotFound'
 import { Profile } from 'components/pages/Profile/Profile'
-import { Workouts } from 'components/pages/Workout/Workout'
+import { Workout } from 'components/pages/Workout/Workout'
+import WorkoutsList from 'components/pages/Workout/WorkoutsList'
 
 export const MyRoutes: React.FC = () => {
 	const { isAuth } = useAuth()
@@ -43,7 +45,17 @@ export const MyRoutes: React.FC = () => {
 		{
 			path: PATHS.WORKOUTS,
 			isAuth: true,
-			element: <Workouts />
+			element: <WorkoutsList />
+		},
+		{
+			path: PATHS.WORKOUT_BY_ID,
+			isAuth: true,
+			element: <Workout />
+		},
+		{
+			path: PATHS.EXERCISE_BY_ID,
+			isAuth: true,
+			element: <Exercise />
 		},
 		{
 			path: PATHS.NOT_FOUND,

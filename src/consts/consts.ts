@@ -5,15 +5,13 @@ export const PATHS = {
 	NEW_WORKOUT: '/new-workout',
 	NEW_EXERCISE: '/new-exercise',
 	WORKOUTS: '/workouts',
+	WORKOUT_BY_ID: '/workouts/:id',
+	EXERCISE_BY_ID: '/exercises/:id',
 	NOT_FOUND: '*'
 }
 export const TOKEN = 'peach'
 
 export const ROUTES = {
-	// AUTH: {
-	// 	LOGIN: '/auth/login',
-	// 	REGISTER: '/auth/register'
-	// },
 	AUTH: '/auth/',
 
 	USER: {
@@ -34,7 +32,8 @@ export const ROUTES = {
 		EXERCISES: '/exercises',
 		LOGS: {
 			ALL: '/exercises/log',
-			COMPLETE: '/exercises/log/complete'
+			COMPLETE: '/exercises/log/complete',
+			TIME: '/exercises/log/time'
 		}
 	}
 }

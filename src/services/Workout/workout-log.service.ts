@@ -1,38 +1,43 @@
 import { $axios } from 'api'
 import { AxiosResponse } from 'axios'
 import { ROUTES } from 'consts/consts'
+import { IExerciseLog } from 'services/Exercise/exercise-log.service'
 import { IExercise } from 'services/Exercise/exercise.service'
+
+import { IWorkout } from './workout.service'
 
 export interface IWorkoutResponse {
 	name: string
 	exerciseIds: number[]
 }
 interface IWorkoutLogService {
-	getById: (exerciseId: number) => Promise<AxiosResponse<IWorkout>>
-	create: (exerciseId: number) => Promise<AxiosResponse<IWorkout>>
-	update: (exerciseId: number) => Promise<AxiosResponse<IWorkout>>
+	getById: (id: number) => Promise<AxiosResponse<IWorkoutLog>>
+	create: (workoutId: number) => Promise<AxiosResponse<IWorkoutLog>>
+	update: (id: number) => Promise<AxiosResponse<IWorkoutLog>>
 }
-interface IWorkout {
+export interface IWorkoutLog {
 	id: number
 	createdAt: string
 	updatedAt: string
-	name: string
-	exercises?: IExercise[]
-	minutes?: number
+	isCompleted: boolean
+	userId: number
+	workoutId: number
+	workout: IWorkout
+	exerciseLogs: IExerciseLog[]
+	minute?: number
 }
-type DeleteMessage = 'Workout deleted successfully!'
 
 const pathAll = ROUTES.WORKOUTS.LOGS.WORKOUTS_LOG.ALL
 const pathComplete = ROUTES.WORKOUTS.LOGS.WORKOUTS_LOG.COMPLETE
 
 export const WorkoutLogService: IWorkoutLogService = {
-	getById: async exerciseId => {
-		return await $axios.get<IWorkout>(pathAll + `/${exerciseId}`)
+	getById: async id => {
+		return await $axios.get<IWorkoutLog>(pathAll + `/${id}`)
 	},
-	create: async exerciseId => {
-		return await $axios.post<IWorkout>(pathAll + `/${exerciseId}`)
+	create: async workoutId => {
+		return await $axios.post<IWorkoutLog>(pathAll + `/${workoutId}`)
 	},
-	update: async exerciseId => {
-		return await $axios.put<IWorkout>(pathComplete + `/${exerciseId}`)
+	update: async id => {
+		return await $axios.put<IWorkoutLog>(pathComplete + `/${id}`)
 	}
 }
