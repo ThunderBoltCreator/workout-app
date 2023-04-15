@@ -1,12 +1,17 @@
 import { useQuery } from '@tanstack/react-query'
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { ExerciseLogService } from 'services/Exercise/exercise-log.service'
+import {
+	ExerciseLogService,
+	ITime
+} from 'services/Exercise/exercise-log.service'
 
-interface IdParams {
+export interface IdParams {
 	id: string
 }
 
 export const useExercisePage = () => {
+	const [times, setTimes] = useState<ITime[]>([])
 	const { id } = useParams<keyof IdParams>() as IdParams
 
 	const {
@@ -17,13 +22,18 @@ export const useExercisePage = () => {
 		['get exercise log', id],
 		() => ExerciseLogService.getById(id),
 		{
-			select: ({ data }) => data
+			select: ({ data }) => data,
+			onSuccess(data) {
+				if (data.times) setTimes(data.times)
+			}
 		}
 	)
 
 	return {
 		exerciseLog,
 		isSuccess,
-		isLoading
+		isLoading,
+		times,
+		setTimes
 	}
 }

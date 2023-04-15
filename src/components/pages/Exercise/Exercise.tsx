@@ -1,13 +1,19 @@
+import { useCompleteLog } from './hooks/useCompleteLog'
+import { useExercisePage } from './hooks/useExercisePage'
+import { useUpdateTime } from './hooks/useUpdateTime'
+
 import Alert from 'components/ui/Alert/Alert'
 import { Loader } from 'components/ui/Loader'
 
+import ExerciseError from './ExerciseError'
 import ExerciseHeader from './ExerciseHeader'
 import Table from './Table/Table'
-import { useExercisePage } from './useExercisePage'
 
 const Exercise: React.FC = () => {
-	const { exerciseLog, isLoading, isSuccess } = useExercisePage()
-
+	const { exerciseLog, isLoading, isSuccess, times, setTimes } =
+		useExercisePage()
+	const { updateTime, errorChange } = useUpdateTime()
+	const { completeLog, errorCompleted } = useCompleteLog()
 	if (!exerciseLog) return null
 
 	return (
@@ -17,7 +23,7 @@ const Exercise: React.FC = () => {
 				className='wrapper-inner-page'
 				style={{ paddingLeft: 0, paddingRight: 0 }}
 			>
-				{/* <ExerciseError errors={[errorChange, errorCompleted]} /> */}
+				<ExerciseError errors={[errorChange, errorCompleted]} />
 				{isLoading ? (
 					<Loader />
 				) : (

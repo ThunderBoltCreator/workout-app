@@ -24,7 +24,7 @@ interface IExerciseLogService {
 		isCompleted: boolean
 	) => Promise<AxiosResponse<any>>
 }
-interface IExerciseUpdateLogBody {
+export interface IExerciseUpdateLogBody {
 	weight?: number
 	repeat?: number
 	isCompleted?: boolean
